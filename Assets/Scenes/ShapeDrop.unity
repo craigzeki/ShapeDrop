@@ -4992,7 +4992,7 @@ MonoBehaviour:
   - {fileID: 936287565653481113, guid: 302c45cf860293b4493b83b513a8faac, type: 3}
   powerUpPrefabs:
   - {fileID: 768986832966666181, guid: dc1001bd4fcb4cd4db05555c044e1077, type: 3}
-  - {fileID: 6958119341055113227, guid: 9dcbd50d01a6b504790c9fb498f0f0a6, type: 3}
+  - {fileID: 7494580696516436820, guid: 5349d68731a8644499d88681448c95f4, type: 3}
   surfaceHolder: {fileID: 3676650377849451337, guid: 8c54532273cd79b43b599c762a7eb18f, type: 3}
   surfaceSize: 5
   difficulty: 0
