@@ -26,14 +26,16 @@ public class GameLoop : MonoBehaviour
         NumOfDifficulties
     }
 
-    public enum Bonuses
+    public enum PowerUps
     {
         Timer = 0,
-        NumOfBonuses
+        AiPowerUp,
+        //Add new power ups here
+        NumOfPowerUps
     }
 
     [SerializeField] private GameObject[] surfacePrefabs = new GameObject[(int)ShapeIDs.NumOfIDs];
-    [SerializeField] private GameObject[] bonusPrefabs = new GameObject[(int)Bonuses.NumOfBonuses];
+    [SerializeField] private GameObject[] powerUpPrefabs = new GameObject[(int)PowerUps.NumOfPowerUps];
     [SerializeField] private GameObject surfaceHolder;
     [SerializeField] private int surfaceSize = 5;
     [SerializeField] private Difficulty difficulty = Difficulty.Easy;
@@ -230,7 +232,12 @@ public class GameLoop : MonoBehaviour
             if((tileCount == 0) && (includeTimeBonus == true))
             {
                 // place a timer bonus in the hole
-                GameObject timerBonus = (GameObject)Instantiate(bonusPrefabs[(int)Bonuses.Timer], newSurfaceTile.transform);
+                GameObject timerBonus = (GameObject)Instantiate(powerUpPrefabs[(int)PowerUps.Timer], newSurfaceTile.transform);
+            }
+            //DEBUG
+            else if(tileCount == 0)
+            {
+                GameObject aiPowerUp = (GameObject)Instantiate(powerUpPrefabs[(int)PowerUps.AiPowerUp], newSurfaceTile.transform);
             }
         }
 

@@ -184,7 +184,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &20422243
 GameObject:
@@ -942,7 +942,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &223974226
 GameObject:
@@ -3188,7 +3188,7 @@ RectTransform:
   - {fileID: 1834170429}
   - {fileID: 331796012}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4990,8 +4990,9 @@ MonoBehaviour:
   - {fileID: 8268092004823013002, guid: 310a3341d585c344e8ac9a0a752ea87d, type: 3}
   - {fileID: 3559600105327263373, guid: 513363687e7222d46bfed198443a7fde, type: 3}
   - {fileID: 936287565653481113, guid: 302c45cf860293b4493b83b513a8faac, type: 3}
-  bonusPrefabs:
+  powerUpPrefabs:
   - {fileID: 768986832966666181, guid: dc1001bd4fcb4cd4db05555c044e1077, type: 3}
+  - {fileID: 6958119341055113227, guid: 9dcbd50d01a6b504790c9fb498f0f0a6, type: 3}
   surfaceHolder: {fileID: 3676650377849451337, guid: 8c54532273cd79b43b599c762a7eb18f, type: 3}
   surfaceSize: 5
   difficulty: 0
@@ -9495,7 +9496,7 @@ Transform:
   - {fileID: 782991877}
   - {fileID: 1633320753}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2132802815
 GameObject:
@@ -9660,7 +9661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5070481204629726047, guid: 4e6f6a2bf838b684b9176ece7e03dde9, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5070481204629726047, guid: 4e6f6a2bf838b684b9176ece7e03dde9, type: 3}
       propertyPath: m_LocalPosition.x
