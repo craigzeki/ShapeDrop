@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 86f60e91b41b5774d845ac2cd3a1e44e, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 2e9b5a6d5ca27b64f87b9f8a14ad376f, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -4992,7 +4992,9 @@ MonoBehaviour:
   - {fileID: 936287565653481113, guid: 302c45cf860293b4493b83b513a8faac, type: 3}
   powerUpPrefabs:
   - {fileID: 768986832966666181, guid: dc1001bd4fcb4cd4db05555c044e1077, type: 3}
-  - {fileID: 7494580696516436820, guid: 5349d68731a8644499d88681448c95f4, type: 3}
+  - {fileID: 2602050054254317372, guid: 5349d68731a8644499d88681448c95f4, type: 3}
+  correctHoleColour: {r: 0.043137256, g: 0.77254903, b: 0, a: 1}
+  incorrectHoleColour: {r: 1, g: 0.0936263, b: 0, a: 1}
   surfaceHolder: {fileID: 3676650377849451337, guid: 8c54532273cd79b43b599c762a7eb18f, type: 3}
   surfaceSize: 5
   difficulty: 0
@@ -8546,7 +8548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1992277061
 RectTransform:
   m_ObjectHideFlags: 0

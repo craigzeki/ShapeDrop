@@ -36,6 +36,8 @@ public class GameLoop : MonoBehaviour
 
     [SerializeField] private GameObject[] surfacePrefabs = new GameObject[(int)ShapeIDs.NumOfIDs];
     [SerializeField] private GameObject[] powerUpPrefabs = new GameObject[(int)PowerUps.NumOfPowerUps];
+    [SerializeField] private Color correctHoleColour;
+    [SerializeField] private Color incorrectHoleColour;
     [SerializeField] private GameObject surfaceHolder;
     [SerializeField] private int surfaceSize = 5;
     [SerializeField] private Difficulty difficulty = Difficulty.Easy;
@@ -229,15 +231,18 @@ public class GameLoop : MonoBehaviour
                 (y - arrayOriginOffset) * newSurfaceTile.GetComponent<SurfaceData>().MyBounds.size.y,
                 0);
             newSurfaceTile.GetComponent<SurfaceData>().Shape = surfaceMap[x, y];
-            if((tileCount == 0) && (includeTimeBonus == true))
+            newSurfaceTile.GetComponentInChildren<Light>().color = correctHoleColour;
+            if ((tileCount == 0) && (includeTimeBonus == true))
             {
                 // place a timer bonus in the hole
                 GameObject timerBonus = (GameObject)Instantiate(powerUpPrefabs[(int)PowerUps.Timer], newSurfaceTile.transform);
+                //newSurfaceTile.GetComponentInChildren<Light>().enabled = false;
             }
             //DEBUG
             else if(tileCount == 0)
             {
                 GameObject aiPowerUp = (GameObject)Instantiate(powerUpPrefabs[(int)PowerUps.AiPowerUp], newSurfaceTile.transform);
+                //newSurfaceTile.GetComponentInChildren<Light>().enabled = false;
             }
         }
 
@@ -253,9 +258,11 @@ public class GameLoop : MonoBehaviour
                 (y - arrayOriginOffset) * newSurfaceTile.GetComponent<SurfaceData>().MyBounds.size.y,
                 0);
             newSurfaceTile.GetComponent<SurfaceData>().Shape = surfaceMap[x, y];
-            if((surfaceMap[x,y] != player.GetComponent<PlayerMovement>().MyShape) && (surfaceMap[x,y] != ShapeIDs.Blank))
+            
+            if ((surfaceMap[x,y] != player.GetComponent<PlayerMovement>().MyShape) && (surfaceMap[x,y] != ShapeIDs.Blank))
             {
-                newSurfaceTile.GetComponentInChildren<Light>().enabled = false;
+                newSurfaceTile.GetComponentInChildren<Light>().color = incorrectHoleColour;
+                //newSurfaceTile.GetComponentInChildren<Light>().enabled = false;
             }
         }
         newSurface.GetComponent<SurfaceData>().RefreshBounds();
