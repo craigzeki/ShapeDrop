@@ -9,9 +9,12 @@ public class PlayerMovement : MonoBehaviour
     private GameObject player;
     private GameObject surface;
     private Renderer myRenderer;
-    private Collider myCollider;
+    private List<Collider> myColliders = new List<Collider>();
     private ParticleSystem myParticleSystem;
     private Light myLight;
+    // ignoreCollision is needed to filter out unecessary collisions when player is made up of multiple colliders - ie. star shape
+    private bool ignoreOnEnterCollision = false;
+    private bool ignoreOnExitCollision = false;
 
 #if UNITY_ANDROID
     [SerializeField] private float sensitivity = 0.1f;
@@ -51,42 +54,57 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        switch (other.tag)
+        if (!ignoreOnEnterCollision)
         {
-            case "Surface":
-                //surfaceTrigger = true;
-                
-                StartCoroutine(KillPlayer());
-                break;
+            switch (other.tag)
+            {
+                case "Surface":
+                    //surfaceTrigger = true;
 
-            case "Gap":
-                //do nothing - covered in trigger exit - don't want to clear the surface while we are still in the hole in case the player collides with the side of the hole and dies
-                break;
+                    StartCoroutine(KillPlayer());
+                    ignoreOnEnterCollision = true;
+                    break;
 
-            case "TimeBonus":
-                TimeManager.Instance.RemainingTime += 10; //10 second increase TODO: replace with a callback to the gameloop where it can be decided how much time to add based on difficulty level. This is not the right place to do this.
-                AchievementManager.Instance.EarnAchievement("My 1st Timer");
-                Destroy(other.gameObject.gameObject);
-                break;
+                case "Gap":
+                    //do nothing - covered in trigger exit - don't want to clear the surface while we are still in the hole in case the player collides with the side of the hole and dies
 
-            default:
+                    break;
 
-                break;
+                case "TimeBonus":
+                    TimeManager.Instance.RemainingTime += 10; //10 second increase TODO: replace with a callback to the gameloop where it can be decided how much time to add based on difficulty level. This is not the right place to do this.
+                    AchievementManager.Instance.EarnAchievement("My 1st Timer");
+                    Destroy(other.gameObject.gameObject);
+                    ignoreOnEnterCollision = true;
+                    break;
+
+                default:
+
+                    break;
+            }
         }
+        
     }
+    
+    
 
     private IEnumerator KillPlayer()
     {
         //sets a latch so that this cannot be called multiple times
         killPlayerInvoked = true;
-        //disable collider
-        myCollider.enabled = false;
+
+        //disable collider(s)
+        foreach (Collider collider in myColliders)
+        {
+            collider.enabled = false;
+        }
+
         //disable renderer (hide the main player mesh)
         myRenderer.enabled = false;
         //disable the yellow light
         myLight.enabled = false;
         //play the explosion particle system
         myParticleSystem.Play();
+        Debug.Log("Play Particle Effect");
         //inform the game loop that the player is died
         GameLoop.Instance.PlayerDied = true;
         //wait for the particle system to finish displaying the explosion
@@ -100,25 +118,31 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        //check what we collided with
-        switch (other.tag)
+        
+        if (!ignoreOnExitCollision)
         {
-            case "Surface":
-                //don't need to do anything - handled this on trigger enter
-                break;
+            //check what we collided with
+            switch (other.tag)
+            {
+                case "Surface":
+                    //don't need to do anything - handled this on trigger enter
+                    break;
 
-            case "Gap":
-                //gapTrigger = false;
-                if(other.GetComponentInParent<SurfaceData>().Shape == myShape)
-                {
-                    ScoringSystem.Instance.SurfaceCleared();
-                }
-                break;
+                case "Gap":
+                    //gapTrigger = false;
+                    if (other.GetComponentInParent<SurfaceData>().Shape == myShape)
+                    {
+                        ScoringSystem.Instance.SurfaceCleared();
+                        ignoreOnExitCollision = true;
+                    }
+                    break;
 
-            default:
-                //do nothing
-                break;
+                default:
+                    //do nothing
+                    break;
+            }
         }
+        
     }
 
     private void Awake()
@@ -131,9 +155,11 @@ public class PlayerMovement : MonoBehaviour
 
         //get references to the key componenets for use later
         myRenderer = GetComponent<Renderer>();
-        myCollider = GetComponent<Collider>();
+        GetComponents(myColliders);
         myParticleSystem = GetComponent<ParticleSystem>();
         myLight = GetComponentInChildren<Light>();
+        ignoreOnEnterCollision = false;
+        ignoreOnExitCollision = false;
 
 #if UNITY_STANDALONE_WIN
         //get the screen dimensions for mouse control
@@ -151,9 +177,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //check we are in the game play state - otherwise do not run
         if (GameSystemController.Instance.CurrentGameState == GameSystemController.GameStates.GamePlay)
         {
+            //reset collision detection - needed to handle multiple colliders for star shape
+            ignoreOnEnterCollision = false;
+            ignoreOnExitCollision = false;
             //get a reference to the current oncoming surface
             surface = GameLoop.Instance.GetCurrentSurface();
 

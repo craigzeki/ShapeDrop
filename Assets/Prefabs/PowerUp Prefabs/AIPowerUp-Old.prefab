@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3411342647798601094}
   - component: {fileID: 8281538925777661334}
   m_Layer: 0
-  m_Name: AIPowerUp
+  m_Name: AIPowerUp-Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
