@@ -338,9 +338,11 @@ GameObject:
   m_Component:
   - component: {fileID: 9028765606215800538}
   - component: {fileID: 7476563199029491169}
+  - component: {fileID: 3400774127593976121}
+  - component: {fileID: -2431636319742620758}
   m_Layer: 0
   m_Name: AIPowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -376,3 +378,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 60
+--- !u!135 &3400774127593976121
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504853110470052960}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.58
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-2431636319742620758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504853110470052960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49bf8757682df24db44feabfd471b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpSettings:
+  - gameSpeed: 0
+    playerScaleOffset: 0
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 1
+  - gameSpeed: 0
+    playerScaleOffset: 0
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 1
+  - gameSpeed: 0
+    playerScaleOffset: 0
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 1
+  - gameSpeed: 0
+    playerScaleOffset: 0
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 1
+  - gameSpeed: 0
+    playerScaleOffset: 0
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 1
+  generateInMatchingHoleOnly: 0
+  powerUpSound: {fileID: 8300000, guid: bbff68e248495524b97e8d8843dbae13, type: 3}

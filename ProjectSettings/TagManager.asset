@@ -9,6 +9,7 @@ TagManager:
   - TimeBonus
   - AchievementList
   - CatButton
+  - PowerUp
   layers:
   - Default
   - TransparentFX

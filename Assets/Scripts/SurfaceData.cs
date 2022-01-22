@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//necessary enums
+using ShapeDrop.Enums;
+
 public class SurfaceData : MonoBehaviour
 {
 
     private Bounds myBounds;
     private float speed = 1.0f;
-    private GameLoop.ShapeIDs shape;
+    private ShapeIDs shape;
 
     public Bounds MyBounds { get => myBounds; }
     public float Speed { get => speed; set => speed = value; }
-    public GameLoop.ShapeIDs Shape { get => shape; set => shape = value; }
+    public ShapeIDs Shape { get => shape; set => shape = value; }
+
+    public bool hasPowerUp = false;
 
     private void Awake()
     {

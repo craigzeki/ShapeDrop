@@ -585,9 +585,10 @@ GameObject:
   - component: {fileID: 8534764175295627824}
   - component: {fileID: 7724618397475474347}
   - component: {fileID: 8708828659922117980}
+  - component: {fileID: -1573899096830866893}
   m_Layer: 0
   m_Name: GrowPowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -639,3 +640,43 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1573899096830866893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9023597786771855498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49bf8757682df24db44feabfd471b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpSettings:
+  - gameSpeed: 0
+    playerScaleOffset: 0.1
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: 0
+    playerScaleOffset: 0.1
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: 0
+    playerScaleOffset: 0.1
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: 0
+    playerScaleOffset: 0.1
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: 0
+    playerScaleOffset: 0.1
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  generateInMatchingHoleOnly: 1
+  powerUpSound: {fileID: 8300000, guid: 2396384394e880142ad45d6243ab160c, type: 3}

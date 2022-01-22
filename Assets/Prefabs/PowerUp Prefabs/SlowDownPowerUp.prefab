@@ -94,9 +94,10 @@ GameObject:
   - component: {fileID: 1628759226964444435}
   - component: {fileID: 4991874760701805190}
   - component: {fileID: 4783630125930773934}
+  - component: {fileID: 7151141831654510195}
   m_Layer: 0
   m_Name: SlowDownPowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,8 +143,48 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.50879127
+  m_Center: {x: 0, y: -0.008791268, z: 0}
+--- !u!114 &7151141831654510195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2148590098976563113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49bf8757682df24db44feabfd471b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpSettings:
+  - gameSpeed: -20
+    playerScaleOffset: 0
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: -15
+    playerScaleOffset: 0
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: -10
+    playerScaleOffset: 0
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: -5
+    playerScaleOffset: 0
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: -5
+    playerScaleOffset: 0
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  generateInMatchingHoleOnly: 0
+  powerUpSound: {fileID: 8300000, guid: 1d26d1f35c9937e44bfbe0773037a26f, type: 3}
 --- !u!1 &6654358539238527056
 GameObject:
   m_ObjectHideFlags: 0

@@ -106,11 +106,9 @@ GameObject:
   - component: {fileID: 1273112433958970896}
   - component: {fileID: 2994402738968611996}
   - component: {fileID: 462345339514712187}
-  - component: {fileID: -8549191548968673854}
-  - component: {fileID: 2676794362183568056}
   m_Layer: 0
-  m_Name: TimerBonus
-  m_TagString: PowerUp
+  m_Name: TimerBonus-Old
+  m_TagString: TimeBonus
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,7 +187,7 @@ MeshCollider:
   m_GameObject: {fileID: 768986832966666181}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -207,55 +205,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 60
---- !u!114 &-8549191548968673854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768986832966666181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e49bf8757682df24db44feabfd471b32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerUpSettings:
-  - gameSpeed: 0
-    playerScaleOffset: 0
-    extraLives: 0
-    gameTime: 30
-    aIStarted: 0
-  - gameSpeed: 0
-    playerScaleOffset: 0
-    extraLives: 0
-    gameTime: 20
-    aIStarted: 0
-  - gameSpeed: 0
-    playerScaleOffset: 0
-    extraLives: 0
-    gameTime: 20
-    aIStarted: 0
-  - gameSpeed: 0
-    playerScaleOffset: 0
-    extraLives: 0
-    gameTime: 15
-    aIStarted: 0
-  - gameSpeed: 0
-    playerScaleOffset: 0
-    extraLives: 0
-    gameTime: 10
-    aIStarted: 0
-  powerUpSound: {fileID: 8300000, guid: 199ed4e603dc3354b91b3d457634fc09, type: 3}
---- !u!135 &2676794362183568056
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 768986832966666181}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5508702
-  m_Center: {x: 0, y: 0.05087018, z: 0.000000029802322}

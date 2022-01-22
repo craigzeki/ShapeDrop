@@ -257,9 +257,10 @@ GameObject:
   - component: {fileID: 7760970966278584248}
   - component: {fileID: 8570007781479010714}
   - component: {fileID: 1309616704344150316}
+  - component: {fileID: 2694139231220226957}
   m_Layer: 0
   m_Name: ShrinkPowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -311,6 +312,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 60
+--- !u!114 &2694139231220226957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989394576236080386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49bf8757682df24db44feabfd471b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpSettings:
+  - gameSpeed: 0
+    playerScaleOffset: -0.1
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: 0
+    playerScaleOffset: -0.1
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: 0
+    playerScaleOffset: -0.1
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: 0
+    playerScaleOffset: -0.1
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  - gameSpeed: 0
+    playerScaleOffset: -0.1
+    extraLives: 0
+    gameTime: 0
+    aIStarted: 0
+  generateInMatchingHoleOnly: 1
+  powerUpSound: {fileID: 8300000, guid: d0abde027946a8b419e6b65b24a7ddf1, type: 3}
 --- !u!1 &7189758168528535169
 GameObject:
   m_ObjectHideFlags: 0

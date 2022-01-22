@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//required enums
+using ShapeDrop.Enums;
+
+
+
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed = 5.0f;
@@ -27,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool killPlayerInvoked = false;
 
+    [SerializeField] private AudioSource myAudioSource;
+
 #if UNITY_STANDALONE_WIN
     [SerializeField] private float mouseSensitivity = 0.1f;
     [SerializeField] private Vector3 mouseStartPos = Vector3.zero;
@@ -34,10 +41,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Vector3 screenPoint = Vector3.zero;
     [SerializeField] private Vector2 screenDimensions;
 #endif
-    private GameLoop.ShapeIDs myShape;
+    private ShapeIDs myShape;
 
     public float Speed { get => speed; set => speed = value; }
-    public GameLoop.ShapeIDs MyShape { get => myShape; set => myShape = value; }
+    public ShapeIDs MyShape { get => myShape; set => myShape = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void Init(GameLoop.ShapeIDs shape)
+    public void Init(ShapeIDs shape)
     {
         MyShape = shape;
         //TODO: script to change player mesh and colliders
@@ -77,6 +84,11 @@ public class PlayerMovement : MonoBehaviour
                     ignoreOnEnterCollision = true;
                     break;
 
+                case "PowerUp":
+                    GameLoop.Instance.CollectPowerUp(other.gameObject);
+                    ignoreOnEnterCollision = true;
+                    break;
+
                 default:
 
                     break;
@@ -102,6 +114,8 @@ public class PlayerMovement : MonoBehaviour
         myRenderer.enabled = false;
         //disable the yellow light
         myLight.enabled = false;
+        // play the sound
+        myAudioSource.Play();
         //play the explosion particle system
         myParticleSystem.Play();
         Debug.Log("Play Particle Effect");
@@ -133,8 +147,13 @@ public class PlayerMovement : MonoBehaviour
                     if (other.GetComponentInParent<SurfaceData>().Shape == myShape)
                     {
                         ScoringSystem.Instance.SurfaceCleared();
-                        ignoreOnExitCollision = true;
                     }
+                    else
+                    {
+                        //went through the wrong shaped hole
+                        GameLoop.Instance.applyWrongSurfacePenalty();
+                    }
+                    ignoreOnExitCollision = true;
                     break;
 
                 default:
@@ -147,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        MyShape = GameLoop.ShapeIDs.Square; //default to square - so that menu system shows properly
+        MyShape = ShapeIDs.Square; //default to square - so that menu system shows properly
 
         //determin the bounds of the shape for use later when limiting player position
         myHalfSurfaceXBounds = GetComponent<Renderer>().bounds.size.x / 2;

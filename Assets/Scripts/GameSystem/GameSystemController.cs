@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//required enums
+using ShapeDrop.Enums;
+
 public class GameSystemController : MonoBehaviour
 {
     public enum GameStates
@@ -116,7 +119,7 @@ public class GameSystemController : MonoBehaviour
                     menuCanvas.enabled = false;
                     //initialise new game
                     GameObject player = GameObject.FindGameObjectWithTag("Player");
-                    player.GetComponent<PlayerMovement>().MyShape = GameLoop.ShapeIDs.Square; //replace this with a shape selected from the menu
+                    player.GetComponent<PlayerMovement>().MyShape = ShapeIDs.Square; //replace this with a shape selected from the menu
                     GameLoop.Instance.Init();
                     TimeManager.Instance.Init();
                     ScoringSystem.Instance.resetScores();
@@ -137,7 +140,7 @@ public class GameSystemController : MonoBehaviour
                     GameLoop.Instance.DestroyAllSurfaces();             
                     //re-instantite player
                     GameObject player = Instantiate(playerPrefab);
-                    player.GetComponent<PlayerMovement>().MyShape = GameLoop.ShapeIDs.Square; //Always use square for menu mode
+                    player.GetComponent<PlayerMovement>().MyShape = ShapeIDs.Square; //Always use square for menu mode
                     CameraDirector.Instance.SetNewPlayer(player);
                     //set camera to menumode
                     CameraDirector.Instance.SetCamera(CameraDirector.CameraList.MenuCam);
@@ -169,7 +172,7 @@ public class GameSystemController : MonoBehaviour
                     adCanvas.enabled = false;
                     //init new game
                     GameObject player = GameObject.FindGameObjectWithTag("Player");
-                    player.GetComponent<PlayerMovement>().MyShape = GameLoop.ShapeIDs.Square; //replace this with a shape selected from the menu
+                    player.GetComponent<PlayerMovement>().MyShape = ShapeIDs.Square; //replace this with a shape selected from the menu
                     GameLoop.Instance.Resume(); //do not reset the surface speed
                     //TimeManager.Instance.Resume(); //do not reset the time - this increases difficulty a little
                     //ScoringSystem.Instance.resetScores(); //do not reset the scores
@@ -189,7 +192,7 @@ public class GameSystemController : MonoBehaviour
                     timeUpCanvas.enabled = false;
                     //init new game
                     GameObject player = GameObject.FindGameObjectWithTag("Player");
-                    player.GetComponent<PlayerMovement>().MyShape = GameLoop.ShapeIDs.Square; //replace this with a shape selected from the menu
+                    player.GetComponent<PlayerMovement>().MyShape = ShapeIDs.Square; //replace this with a shape selected from the menu
                     GameLoop.Instance.Init();
                     TimeManager.Instance.Init();
                     ScoringSystem.Instance.resetScores();
