@@ -197,6 +197,8 @@ MonoBehaviour:
   speed: 15
   sensitivity: 0.75
   myAudioSource: {fileID: 7640996642173948703}
+  minScale: {x: 0.1, y: 0.1, z: 0.5}
+  maxScale: {x: 0.6, y: 0.6, z: 0.5}
 --- !u!64 &5116137019219189022
 MeshCollider:
   m_ObjectHideFlags: 0

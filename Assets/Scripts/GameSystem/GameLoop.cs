@@ -19,6 +19,7 @@ public class GameLoop : MonoBehaviour
     [SerializeField] private Difficulty difficulty = Difficulty.Easy;
     [SerializeField] private Dictionary<int, int> difficultyThresholds = new Dictionary<int, int>() { {(int)Difficulty.Easy, 0 },{ (int)Difficulty.Medium, 5 },{(int)Difficulty.Hard, 10 },{(int)Difficulty.VeryHard, 20},{(int)Difficulty.Ultra, 40 } };
     [SerializeField] private Dictionary<int, float> difficultySpeeds = new Dictionary<int, float>() { {(int)Difficulty.Easy, 30 },{ (int)Difficulty.Medium, 50 },{(int)Difficulty.Hard, 70 },{(int)Difficulty.VeryHard, 90},{(int)Difficulty.Ultra, 100 } };
+    [SerializeField] private Dictionary<int, int> difficultyTimerEveryXSurfaces = new Dictionary<int, int>() { {(int)Difficulty.Easy, 4 },{ (int)Difficulty.Medium, 5 },{(int)Difficulty.Hard, 6 },{(int)Difficulty.VeryHard, 7},{(int)Difficulty.Ultra, 8 } };
     
     [SerializeField] private int numSurfacesToBuffer = 3;
     
@@ -29,14 +30,15 @@ public class GameLoop : MonoBehaviour
 
     private static GameLoop instance;
     [SerializeField] private float surfaceSpeed = 0;
+    private int forceTimerEveryXSurface = 0;
+    private int timerDeltaSurfaces = 0;
 
     private GameModifiers gameModifiers = new GameModifiers();
 
     private bool playerDied = false;
     [SerializeField] private float wrongSurfacePenaltyScaleOffset = 0.1f;
     [SerializeField] private AudioSource myAudioSource;
-    [SerializeField] private float maxScaleFactor = 2.0f;
-    private Vector3 minPlayerScale = Vector3.zero;
+    
     private float surfaceSpeedOffset = 0;
     [SerializeField] private AudioClip wrongHolePenaltySound;
     [SerializeField] private int maxPowerUpsAtOnce = 3;
@@ -66,7 +68,7 @@ public class GameLoop : MonoBehaviour
         PlayerDied = false;
         CameraDirector.Instance.SetCamera(CameraDirector.CameraList.FollowCam);
         player = GameObject.FindGameObjectWithTag("Player");
-        minPlayerScale = player.transform.localScale;
+        
         surfaceSpeedOffset = 0;
     }
 
@@ -75,7 +77,7 @@ public class GameLoop : MonoBehaviour
         PlayerDied = false;
         CameraDirector.Instance.SetCamera(CameraDirector.CameraList.FollowCam);
         player = GameObject.FindGameObjectWithTag("Player");
-        minPlayerScale = player.transform.localScale;
+        
         surfaceSpeedOffset = 0;
     }
 
@@ -152,6 +154,7 @@ public class GameLoop : MonoBehaviour
         {
             difficulty = Difficulty.Easy;
             difficultySpeeds.TryGetValue((int)difficulty, out surfaceSpeed);
+            difficultyTimerEveryXSurfaces.TryGetValue((int)difficulty, out forceTimerEveryXSurface);
         }
         else
         {
@@ -163,6 +166,7 @@ public class GameLoop : MonoBehaviour
                 {
                     difficulty++;
                     difficultySpeeds.TryGetValue((int)difficulty, out surfaceSpeed);
+                    difficultyTimerEveryXSurfaces.TryGetValue((int)difficulty, out forceTimerEveryXSurface);
                 }
 
             }
@@ -178,6 +182,7 @@ public class GameLoop : MonoBehaviour
 
         PowerUps[] powerUpSeq = new PowerUps[((int)PowerUps.NumOfPowerUps)];
         float[] randFloats = new float[((int)PowerUps.NumOfPowerUps)];
+        bool timerAdded = false;
 
         for (int i = 0; i < ((int)PowerUps.NumOfPowerUps); i++)
         {
@@ -192,17 +197,48 @@ public class GameLoop : MonoBehaviour
             numOfPowerUpsToGenerate = ((int)PowerUps.NumOfPowerUps);
         }
 
+        timerAdded = false;
+
         for (int i = 0; i < numOfPowerUpsToGenerate; i++)
         {
-            if(powerUpRequiresSameShapeHole[((int)powerUpSeq[i])])
+            if(powerUpSeq[i] == PowerUps.Timer)
             {
-                powerUpListMatchingHole.Add(powerUpSeq[i]);
+                timerAdded = true;
             }
-            else
-            {
-                powerUpListAnyHole.Add(powerUpSeq[i]);
-            }
+            addPowerUpToList((powerUpSeq[i]), ref powerUpListMatchingHole, ref powerUpListAnyHole);
+            //if(powerUpRequiresSameShapeHole[((int)powerUpSeq[i])])
+            //{
+            //    powerUpListMatchingHole.Add(powerUpSeq[i]);
+            //}
+            //else
+            //{
+            //    powerUpListAnyHole.Add(powerUpSeq[i]);
+            //}
                 
+        }
+
+        if((!timerAdded) && (timerDeltaSurfaces >= forceTimerEveryXSurface))
+        {
+            //need to add a timer to balance the game --> force into matching hole list
+            addPowerUpToList(PowerUps.Timer, ref powerUpListMatchingHole, ref powerUpListMatchingHole);
+            timerDeltaSurfaces = 0;
+        }
+        else
+        {
+            timerDeltaSurfaces++;
+        }
+        
+    }
+
+    private void addPowerUpToList(PowerUps powerUp, ref List<PowerUps> powerUpListMatchingHole, ref List<PowerUps> powerUpListAnyHole)
+    {
+        if (powerUpRequiresSameShapeHole[((int)powerUp)])
+        {
+            powerUpListMatchingHole.Add(powerUp);
+        }
+        else
+        {
+            powerUpListAnyHole.Add(powerUp);
         }
     }
 
@@ -254,7 +290,7 @@ public class GameLoop : MonoBehaviour
         //The easier the difficulty, the more holes mathcing your shape that are potentially available
         int d = (int)Random.Range((int)1, (int)Difficulty.NumOfDifficulties - (int)difficulty);
 
-        int powerUpIndex = 0; //used to track through the power up lists
+        int powerUpIndex = powerUpsMatchingHole.Count - 1; //used to track through the power up lists
 
         for(tileCount = 0; (tileCount < d) && (tileCount < surfaceMap.Length); tileCount++)
         {
@@ -282,16 +318,16 @@ public class GameLoop : MonoBehaviour
             //}
 
             //add any powerups which require matching the shapes hole
-            if(powerUpIndex < powerUpsMatchingHole.Count)
+            if(powerUpIndex >= 0)
             {
                 Instantiate(powerUpPrefabs[(int)powerUpsMatchingHole[powerUpIndex]], newSurfaceTile.transform);
                 newSurfaceTile.GetComponent<SurfaceData>().hasPowerUp = true;
-                powerUpIndex++;
+                powerUpIndex--;
             }
         }
 
         //reset the power up index for use in the AnyHole array
-        powerUpIndex = 0;
+        powerUpIndex = powerUpsAnyHole.Count - 1;
 
         //populate the rest of the map
         for(; tileCount < surfaceMap.Length; tileCount++)
@@ -312,11 +348,11 @@ public class GameLoop : MonoBehaviour
                 //newSurfaceTile.GetComponentInChildren<Light>().enabled = false;
             }
 
-            if (powerUpIndex < powerUpsAnyHole.Count)
+            if (powerUpIndex >= 0)
             {
                 Instantiate(powerUpPrefabs[(int)powerUpsAnyHole[powerUpIndex]], newSurfaceTile.transform);
                 newSurfaceTile.GetComponent<SurfaceData>().hasPowerUp = true;
-                powerUpIndex++;
+                powerUpIndex--;
             }
         }
 
@@ -404,9 +440,12 @@ public class GameLoop : MonoBehaviour
 
     private void adjustPlayerScale(Vector3 currentScale, float scaleOffset)
     {
-        player.transform.localScale = new Vector3(Mathf.Clamp(currentScale.x + scaleOffset, minPlayerScale.x, (minPlayerScale.x * maxScaleFactor)),
-                                                    Mathf.Clamp(currentScale.y + scaleOffset, minPlayerScale.y, (minPlayerScale.y * maxScaleFactor)),
-                                                    player.transform.localScale.z);
+        Vector3 playerMinScale = player.GetComponent<PlayerMovement>().minScale;
+        Vector3 playerMaxScale = player.GetComponent<PlayerMovement>().maxScale;
+
+        player.transform.localScale = new Vector3(Mathf.Clamp(currentScale.x + scaleOffset, playerMinScale.x, playerMaxScale.x),
+                                                    Mathf.Clamp(currentScale.y + scaleOffset, playerMinScale.y, playerMaxScale.y),
+                                                    Mathf.Clamp(currentScale.z + scaleOffset, playerMinScale.z, playerMaxScale.z));
     }
 
     IEnumerator lerpPlayerScale(float targetOffset)

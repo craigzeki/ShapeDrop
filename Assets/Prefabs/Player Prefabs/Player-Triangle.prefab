@@ -227,6 +227,8 @@ MonoBehaviour:
   speed: 15
   sensitivity: 0.75
   myAudioSource: {fileID: -5903897920459304385}
+  minScale: {x: 0.1, y: 0.1, z: 0.5}
+  maxScale: {x: 0.6, y: 0.6, z: 0.5}
 --- !u!199 &7337294876453803625
 ParticleSystemRenderer:
   serializedVersion: 6

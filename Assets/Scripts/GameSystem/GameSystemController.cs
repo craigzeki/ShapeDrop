@@ -66,7 +66,14 @@ public class GameSystemController : MonoBehaviour
         adCanvas.enabled = false;
         timeUpCanvas.enabled = false;
         menuCanvas.enabled = true;
-        
+
+        //instantite player
+        GameObject player = Instantiate(playerPrefab);
+        player.GetComponent<PlayerMovement>().MyShape = ShapeIDs.Square; //Always use square for menu mode
+        CameraDirector.Instance.SetNewPlayer(player);
+        //set camera to menumode
+        CameraDirector.Instance.SetCamera(CameraDirector.CameraList.MenuCam);
+
     }
 
     // Start is called before the first frame update

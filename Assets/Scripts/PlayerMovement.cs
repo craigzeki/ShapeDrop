@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     private bool killPlayerInvoked = false;
 
     [SerializeField] private AudioSource myAudioSource;
+    [SerializeField] public Vector3 minScale = Vector3.zero;
+    [SerializeField] public Vector3 maxScale = Vector3.zero;
 
 #if UNITY_STANDALONE_WIN
     [SerializeField] private float mouseSensitivity = 0.1f;
@@ -56,6 +58,16 @@ public class PlayerMovement : MonoBehaviour
     public void Init(ShapeIDs shape)
     {
         MyShape = shape;
+
+        if(minScale == Vector3.zero)
+        {
+            minScale = transform.localScale;
+        }
+        if((maxScale == Vector3.zero))
+        {
+            maxScale = transform.localScale;
+        }
+
         //TODO: script to change player mesh and colliders
     }
 

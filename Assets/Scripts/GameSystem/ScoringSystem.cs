@@ -42,16 +42,20 @@ public class ScoringSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        elapsedTime = Mathf.RoundToInt(TimeManager.Instance.TimeElapsed);
-        if (elapsedTime > highTime)
+        if(GameSystemController.Instance.CurrentGameState == GameSystemController.GameStates.GamePlay)
         {
-            //player has achieved high score (time)
-            highTime = elapsedTime;
+            elapsedTime = Mathf.RoundToInt(TimeManager.Instance.TimeElapsed);
+            if (elapsedTime > highTime)
+            {
+                //player has achieved high score (time)
+                highTime = elapsedTime;
 
-            //save the high score
-            PlayerPrefs.SetInt("HighTime", highTime);
-            PlayerPrefs.Save();
+                //save the high score
+                PlayerPrefs.SetInt("HighTime", highTime);
+                PlayerPrefs.Save();
+            }
         }
+        
         UpdateScoreText();
         CheckAchievements();
     }

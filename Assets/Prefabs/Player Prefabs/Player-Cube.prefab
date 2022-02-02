@@ -210,6 +210,8 @@ MonoBehaviour:
   speed: 15
   sensitivity: 0.75
   myAudioSource: {fileID: 3660639285254710744}
+  minScale: {x: 0.1, y: 0.1, z: 0.5}
+  maxScale: {x: 0.6, y: 0.6, z: 0.5}
 --- !u!54 &7859437414384446271
 Rigidbody:
   m_ObjectHideFlags: 0
