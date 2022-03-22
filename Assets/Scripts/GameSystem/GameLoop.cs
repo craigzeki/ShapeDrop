@@ -33,7 +33,7 @@ public class GameLoop : MonoBehaviour
     private int forceTimerEveryXSurface = 0;
     private int timerDeltaSurfaces = 0;
 
-    private GameModifiers gameModifiers = new GameModifiers();
+    private GameModifiers gameModifiers = new GameModifiers(true); //use constructor overload to reset to defaults
 
     private bool playerDied = false;
     [SerializeField] private float wrongSurfacePenaltyScaleOffset = 0.1f;
@@ -58,11 +58,8 @@ public class GameLoop : MonoBehaviour
 
     public void Init()
     {
-        gameModifiers.gameTime = 0; //additional seconds added to timer
-        gameModifiers.gameSpeed = 0; //added to surface speed
-        gameModifiers.playerScaleOffset = 0.0f; //added to player scale
-        gameModifiers.extraLives = 0; //added to player lives
-        gameModifiers.aIStarted = false; //triggers AI to start
+        //clear the game modifiers
+        gameModifiers.ResetToDefaults();
 
         UpdateDifficulty(0); //will set surfaceSpeed = 0 also
         PlayerDied = false;
@@ -421,12 +418,12 @@ public class GameLoop : MonoBehaviour
 
     private void applyGameModifiers()
     {
-        TimeManager.Instance.RemainingTime += gameModifiers.gameTime;
-        StartCoroutine(lerpPlayerScale(gameModifiers.playerScaleOffset));
+        TimeManager.Instance.RemainingTime += gameModifiers.GameTime;
+        StartCoroutine(lerpPlayerScale(gameModifiers.PlayerScaleOffset));
         //player.transform.localScale = new Vector3(Mathf.Clamp(player.transform.localScale.x + gameModifiers.playerScaleOffset, minPlayerScale.x, (minPlayerScale.x * maxScaleFactor)),
         //                                            Mathf.Clamp(player.transform.localScale.y + gameModifiers.playerScaleOffset, minPlayerScale.y, (minPlayerScale.y * maxScaleFactor)),
         //                                            player.transform.localScale.z);
-        surfaceSpeedOffset += gameModifiers.gameSpeed;
+        surfaceSpeedOffset += gameModifiers.GameSpeed; //CZ
 
 
     }
