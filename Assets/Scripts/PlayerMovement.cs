@@ -156,6 +156,7 @@ public class PlayerMovement : MonoBehaviour
 
                 case "Gap":
                     //gapTrigger = false;
+                    //if exiting through the hole of the matching shape, add points to score
                     if (other.GetComponentInParent<SurfaceData>().Shape == myShape)
                     {
                         ScoringSystem.Instance.SurfaceCleared();

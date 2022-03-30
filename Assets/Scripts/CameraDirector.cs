@@ -29,6 +29,7 @@ public class CameraDirector : MonoBehaviour
     {
         get
         {
+            //set the instance variable if not yet set
             if (instance == null)
             {
                 instance = GameObject.FindObjectOfType<CameraDirector>();

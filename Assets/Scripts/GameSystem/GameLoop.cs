@@ -275,6 +275,7 @@ public class GameLoop : MonoBehaviour
         int[] surfaceSeq = new int[surfaceSize * surfaceSize];
         float[] randomSeq = new float[surfaceSeq.Length];
 
+        //populate the two sequences
         for (int i = 0; i < surfaceSeq.Length; i++)
         {
             surfaceSeq[i] = i;
