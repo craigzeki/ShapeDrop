@@ -28,7 +28,7 @@ public class GameLoop : MonoBehaviour
     private List<GameObject> surfaces = new List<GameObject>();
     private GameObject player;
 
-    private static GameLoop instance;
+    //private static GameLoop instance;
     [SerializeField] private float surfaceSpeed = 0;
     private int forceTimerEveryXSurface = 0;
     private int timerDeltaSurfaces = 0;
@@ -44,6 +44,7 @@ public class GameLoop : MonoBehaviour
     [SerializeField] private int maxPowerUpsAtOnce = 3;
     private bool[] powerUpRequiresSameShapeHole = new bool[((int)PowerUps.NumOfPowerUps)] {false, false, false, true, true, false, false };
 
+    private static GameLoop instance;
     public static GameLoop Instance {
 
         get
