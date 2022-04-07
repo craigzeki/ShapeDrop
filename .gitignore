@@ -2,7 +2,7 @@
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
-[Bb]uilds/
+#[Bb]uilds/ allow build to be included for marking
 [Ll]ogs/
 [Uu]serSettings/
 Assets/AssetStoreTools*
