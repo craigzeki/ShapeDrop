@@ -1,3 +1,8 @@
+//Author: Craig Zeki
+//Student ID: zek21003166
+
+//Based on Youtube tutorial https://youtube.com/playlist?list=PLX-uZVK_0K_5vK5wDQ2p2gFFg-uIkuJQA
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
