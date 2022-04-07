@@ -35,5 +35,5 @@ ExportedObj/
 sysinfo.txt
 
 # Builds
-*.apk
+#*.apk allow build to be included for marking
 *.unitypackage
