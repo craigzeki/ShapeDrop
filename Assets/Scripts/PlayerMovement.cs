@@ -100,7 +100,10 @@ public class PlayerMovement : MonoBehaviour
                     break;
 
                 case "PowerUp":
-                    GameLoop.Instance.CollectPowerUp(other.gameObject);
+                    if (GameLoop.Instance.CollectPowerUp(other.gameObject) == PowerUps.Timer)
+                    {
+                        AchievementManager.Instance.EarnAchievement("My 1st Timer");
+                    }
                     ignoreOnEnterCollision = true;
                     break;
 

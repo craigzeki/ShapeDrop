@@ -397,12 +397,13 @@ public class GameLoop : MonoBehaviour
         }
     }
 
-   public void CollectPowerUp(GameObject powerUpObj)
+   public PowerUps CollectPowerUp(GameObject powerUpObj)
     {
+        PowerUps temp;
         //Test to make sure powerUpObj is not null
-        if (powerUpObj == null) { Debug.Log("GameLoop.CollectPowerUp : powerUpObj = Null");  return; }
+        if (powerUpObj == null) { Debug.Log("GameLoop.CollectPowerUp : powerUpObj = Null");  return PowerUps.NumOfPowerUps; }
         //Test to make sure PowerUp component is present
-        if(powerUpObj.GetComponent<PowerUp>() ==  null) { Debug.Log("GameLoop.CollectPowerUp : powerUpObj.PowerUp = Null"); return; }
+        if(powerUpObj.GetComponent<PowerUp>() ==  null) { Debug.Log("GameLoop.CollectPowerUp : powerUpObj.PowerUp = Null"); return PowerUps.NumOfPowerUps; }
 
         //get the correct set of modifiers for this power up dependant upon difficulty
         gameModifiers = powerUpObj.GetComponent<PowerUp>().Collect(difficulty);
@@ -410,9 +411,11 @@ public class GameLoop : MonoBehaviour
 
         Debug.Log("Game Modifiers collected: " + gameModifiers.ToString());
         playSoundEffect(powerUpObj.GetComponent<PowerUp>().PowerUpSound);
-        
-        Destroy(powerUpObj);
 
+        temp = powerUpObj.GetComponent<PowerUp>().PowerUpType;
+
+        Destroy(powerUpObj);
+        return temp;
     }
 
     private void playSoundEffect(AudioClip clip)

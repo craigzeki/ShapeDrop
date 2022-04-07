@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e49bf8757682df24db44feabfd471b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpType: 2
   powerUpSettings:
   - gameSpeed: -20
     playerScaleOffset: 0
@@ -183,7 +184,6 @@ MonoBehaviour:
     extraLives: 0
     gameTime: 0
     aIStarted: 0
-  generateInMatchingHoleOnly: 0
   powerUpSound: {fileID: 8300000, guid: 1d26d1f35c9937e44bfbe0773037a26f, type: 3}
 --- !u!1 &6654358539238527056
 GameObject:
